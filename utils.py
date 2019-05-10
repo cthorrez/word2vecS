@@ -24,7 +24,7 @@ class NegativeSampler:
 
 
 class SubSampler:
-    def __init__(self, vocab, t=5e-5, seed=0):
+    def __init__(self, vocab, t=(5e-5), seed=0):
         np.random.seed(seed)
         tot_words = np.sum([v[1] for v in vocab.values()])
         self.vocab = vocab

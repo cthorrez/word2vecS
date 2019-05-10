@@ -8,8 +8,9 @@ from utils import get_pairs, NegativeSampler, SubSampler
 
 
 class Word2VecS():
-    def __init__(self, d, p, dataset, min_count, k, c, lr, seed=0,):
+    def __init__(self, d, p, dataset, min_count, k, c, lr, seed=0, fname='vecs.npy'):
         torch.manual_seed(seed)
+        self.fname=fname
         self.d = d
         self.p = p
         self.dataset = dataset
@@ -104,7 +105,7 @@ class Word2VecS():
             #negative sample every sense pairing?
             # n_probs = self.sigmoid(-1.0*n_scores)
 
-            # only negatie sample the max?
+            # only negative sample the max?
             n_probs = self.sigmoid(-1.0*torch.max(n_scores.view(len(n_scores),-1),dim=1)[0])
 
             # only negative sample the sense that inp was actually used in. (the row which max occurs in)
@@ -145,11 +146,11 @@ class Word2VecS():
         return epoch_loss
 
 
-    def save(self, fpath='vecs.npy'):
+    def save(self):
         outdict = {}
         for word, (idx,_) in self.vocab.items():
             outdict[word] = self.vecs[idx].data.numpy()
-        np.save(fpath, outdict)
+        np.save(self.fname, outdict)
 
 
 

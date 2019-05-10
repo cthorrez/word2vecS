@@ -26,20 +26,31 @@ def main(vec_path,k):
     # dists = squareform(pdist(vecs_array, 'euclidean'))
     topk = np.argsort(dists, axis=1)[:,:k]
 
-    word = 'iraq_0'
-    idx = word2idx[word]
+    word = 'kings'
+
+    word1 = word + '_0'
+    print(word1)
+    idx = word2idx[word1]
     idxs = topk[idx]
     words = [(idx2word[i], round(dists[idx,i],2)) for i in idxs]
-    print(words)
+    print(words[1:])
+
+
+    word2 = word + '_1'
+    print(word2)
+    idx = word2idx[word2]
+    idxs = topk[idx]
+    words = [(idx2word[i], round(dists[idx,i],2)) for i in idxs]
+    print(words[1:])
 
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:
-        vec_path = 'vecs.npy'
-        k = 10
+        vec_path = 'w2vs_vecs.npy'
+        k = 5
     elif len(sys.argv) ==2:
         vec_path = sys.argv[1]
-        k = 10
+        k = 5
     else:
         assert len(sys.argv) == 3
         vec_path = sys.argv[1]
