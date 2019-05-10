@@ -1,3 +1,4 @@
-data/*
+data/news.2013.en.shuffled.txt
+data/news.2012.en.shuffled.txt
 __pycache__
 *.pyc
